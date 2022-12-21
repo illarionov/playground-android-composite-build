@@ -26,10 +26,10 @@ jobs:
       - name: Restarting gradle daemon and re-executing build
         run: |
           ./gradlew --stop
-          ./gradlew --build-cache clean :app:lintReportDebug
+          ./gradlew --build-cache --stacktrace clean :app:lintReportDebug
 
       - name: Re-executing build without restarting daemon
-        run: ./gradlew --build-cache clean :app:lintReportDebug
+        run: ./gradlew --build-cache --stacktrace clean :app:lintReportDebug
 
       - name: Restarting gradle daemon and re-executing build
         run: |
