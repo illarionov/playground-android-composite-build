@@ -7,18 +7,21 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK 17
+      - name: Set up JDK 19
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: '19'
           distribution: 'temurin'
 
       - name: Execute Gradle build
         run: ./gradlew --build-cache clean :app:lintReportDebug
+
+      - name: Optin analytics
+        run: sed -ie 's|"hasOptedIn":false|"hasOptedIn":true|' ~/.android/analytics.settings
 
       - name: Restarting gradle daemon and re-executing build
         run: |
