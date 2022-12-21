@@ -1,0 +1,31 @@
+name: Build
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      - name: Execute Gradle build
+        run: ./gradlew --build-cache clean :app:lintReportDebug
+
+      - name: Restarting gradle daemon and re-executing build
+        run: |
+          ./gradlew --stop
+          ./gradlew --build-cache clean :app:lintReportDebug
+
+      - name: Re-executing build without restarting daemon
+        run: ./gradlew --build-cache clean :app:lintReportDebug
+
+      - name: Restarting gradle daemon and re-executing build
+        run: |
+          ./gradlew --stop
+          ./gradlew --build-cache --stacktrace clean :app:lintReportDebug
