@@ -1,6 +1,9 @@
 name: Build
 
-on: workflow_dispatch
+on:
+  push:
+    branches: [ "bug-agp-740-rc01-AndroidLintWorkAction" ]
+  workflow_dispatch:
 
 jobs:
   build:
