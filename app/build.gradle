@@ -1,0 +1,43 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.example.testAdt'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.example.testAdt"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+
+    dependencies {
+        androidTestImplementation "androidx.test:runner:1.5.2"
+        androidTestImplementation "androidx.test:rules:1.5.0"
+    }
+
+    testOptions {
+        managedDevices {
+            devices {
+                pixel2api30(com.android.build.api.dsl.ManagedVirtualDevice) {
+                    device = "Pixel 2"
+                    apiLevel = 30
+                    systemImageSource = "aosp-atd"
+                }
+            }
+        }
+    }
+}
