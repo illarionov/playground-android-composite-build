@@ -1,0 +1,10 @@
+pluginManagement {
+    includeBuild("gradle/plugin/settings")
+}
+
+plugins {
+    id("com.example.gradle.settings")
+}
+
+rootProject.name = "CompositeProject"
+include ':app'
