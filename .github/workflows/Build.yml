@@ -1,0 +1,25 @@
+name: build
+
+on:
+  push:
+    branches:
+      - 'bug-agp-890-conf-cache'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '23'
+
+      - name: Assemble debug build, run tests
+        run: ./gradlew build --rerun-tasks
