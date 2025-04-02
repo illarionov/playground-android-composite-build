@@ -22,4 +22,4 @@ jobs:
           java-version: '23'
 
       - name: Assemble debug build, run tests
-        run: ./gradlew build --rerun-tasks
+        run: ./gradlew  --console=verbose :config:clean :config:compileTestKotlin --rerun-tasks
