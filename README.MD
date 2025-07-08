@@ -8,8 +8,8 @@ Related issues:
 
 ### Steps to reproduce
 
-Run `./gradlew app:linuxX64Test --rerun-tasks` (it may take several attempts, try to repeat 5-10 times).
+Run `./gradlew app:check --rerun-tasks --stacktrace` (it may take several attempts, try to repeat 5-10 times).
 
-The fails with the `IndexOutOfBoundsException` or similar exception.
+It will fails with the `IndexOutOfBoundsException` or similar exception.
 
 

@@ -3,13 +3,17 @@ name: build
 on:
   push:
     branches:
-      - 'bug-jdk24-screenshottest'
+      - 'bug-kmp-gradle-tests'
   workflow_dispatch:
 
 jobs:
   build:
-    name: Build
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ macos-13, macos-latest, ubuntu-latest ]
+      fail-fast: false
+    name: Build ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout sources
@@ -21,5 +25,5 @@ jobs:
           distribution: 'corretto'
           java-version: '24'
 
-      - name: Validate screenshot
-        run: ./gradlew :app:validateDebugScreenshotTest --rerun-tasks --stacktrace
+      - name: Run test
+        run: ./gradlew app:check --rerun-tasks --stacktrace
